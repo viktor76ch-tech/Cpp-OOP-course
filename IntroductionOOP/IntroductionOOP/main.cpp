@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 #include <cmath>
 using namespace std;
 using std::cout;
@@ -38,7 +38,7 @@ public:
 	this->x = x;
 	this->y = 0;
 	cout << "SingleArgumentConstructor:" << this << endl;
-	//Конструктор с одним параметром
+	//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РѕРґРЅРёРј РїР°СЂР°РјРµС‚СЂРѕРј
 	}*/
 	Point(double x = 0, double y = 0)
 	{
@@ -59,8 +59,8 @@ public:
 	//Methods
 	double Distance(const Point& other) const
 	{
-		//this - эта точка (находим расстояние от этой точки);
-		//other - та точка (до указанной точки);
+		//this - СЌС‚Р° С‚РѕС‡РєР° (РЅР°С…РѕРґРёРј СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ СЌС‚РѕР№ С‚РѕС‡РєРё);
+		//other - С‚Р° С‚РѕС‡РєР° (РґРѕ СѓРєР°Р·Р°РЅРЅРѕР№ С‚РѕС‡РєРё);
 		//this->x *= 100;		//E0137
 		//other.x *= 100;	//E0137
 		double x_distance = this->x - other.x;
@@ -87,12 +87,12 @@ void main()
 	setlocale(LC_ALL, "");
 #ifdef STRACT_POINT
 	setlocale(LC_ALL, "");
-	int a;		//Объявление переменной 'a' типа 'int';
-	Point A;	//Объявление переменной 'A' типа 'Point';
-	//Создание объекта 'A' структуры 'Point';
-	//Создание экземпляра 'A' структуры 'Point';
+	int a;		//РћР±СЉСЏРІР»РµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ 'a' С‚РёРїР° 'int';
+	Point A;	//РћР±СЉСЏРІР»РµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ 'A' С‚РёРїР° 'Point';
+	//РЎРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚Р° 'A' СЃС‚СЂСѓРєС‚СѓСЂС‹ 'Point';
+	//РЎРѕР·РґР°РЅРёРµ СЌРєР·РµРјРїР»СЏСЂР° 'A' СЃС‚СЂСѓРєС‚СѓСЂС‹ 'Point';
 	//'A' is instance of struct 'Point'
-	//Instantiate - создать объект.
+	//Instantiate - СЃРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚.
 	A.x = 2;
 	A.y = 3;
 	cout << A.x << "\t" << A.y << endl;
@@ -108,29 +108,29 @@ void main()
 	Point B;
 	B.set_x(7);
 	B.set_y(8);
-	cout << "Координаты точки A(" << A.get_x() << "," << A.get_y() << ")" << endl;
-	cout << "Координаты точки B(" << B.get_x() << "," << B.get_y() << ")" << endl;
+	cout << "РљРѕРѕСЂРґРёРЅР°С‚С‹ С‚РѕС‡РєРё A(" << A.get_x() << "," << A.get_y() << ")" << endl;
+	cout << "РљРѕРѕСЂРґРёРЅР°С‚С‹ С‚РѕС‡РєРё B(" << B.get_x() << "," << B.get_y() << ")" << endl;
 	cout << delimeter << endl;
-	cout << "Расстояние от точки 'А' до точки 'В': " << A.Distance(B) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё 'Рђ' РґРѕ С‚РѕС‡РєРё 'Р’': " << A.Distance(B) << endl;
 	cout << delimeter << endl;
-	cout << "Расстояние от точки 'B' до точки 'A': " << B.Distance(A) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё 'B' РґРѕ С‚РѕС‡РєРё 'A': " << B.Distance(A) << endl;
 	cout << delimeter << endl;
 
-	cout << "Расстояние между точками 'A' и 'B': " << distance(A, B) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ С‚РѕС‡РєР°РјРё 'A' Рё 'B': " << distance(A, B) << endl;
 	cout << delimeter << endl;
-	cout << "Расстояние между точками 'B' и 'A': " << distance(B, A) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ С‚РѕС‡РєР°РјРё 'B' Рё 'A': " << distance(B, A) << endl;
 #endif // DISTANCE_CHECK
 
 #ifdef CONSTRUCTOR_CHECK
-	Point A; //Здесь мы просто создаем объект, и для этого неявно вызывается конструктор по умолчанию
+	Point A; //Р—РґРµСЃСЊ РјС‹ РїСЂРѕСЃС‚Рѕ СЃРѕР·РґР°РµРј РѕР±СЉРµРєС‚, Рё РґР»СЏ СЌС‚РѕРіРѕ РЅРµСЏРІРЅРѕ РІС‹Р·С‹РІР°РµС‚СЃСЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 	A.Print();
 	/*{
 		Point B;
-		cout << "Point B существует" << endl;
+		cout << "Point B СЃСѓС‰РµСЃС‚РІСѓРµС‚" << endl;
 	}
-	cout << "Здесь Point B уже не существует" << endl;*/
+	cout << "Р—РґРµСЃСЊ Point B СѓР¶Рµ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚" << endl;*/
 
-	Point B = 5;  //Single-argument constructor - Конструктор с одним параметром
+	Point B = 5;  //Single-argument constructor - РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РѕРґРЅРёРј РїР°СЂР°РјРµС‚СЂРѕРј
 	B.Print();
 
 	Point C(7, 8);
