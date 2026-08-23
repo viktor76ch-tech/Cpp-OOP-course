@@ -56,6 +56,14 @@ public:
 	{
 		cout << "Destructor:\t\t" << this << endl;;
 	}
+	//Operators
+	Point& operator = (const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyAssignment:\t\t" << this << endl;
+		return *this;
+	}
 	//Methods
 	double Distance(const Point& other) const
 	{
@@ -74,12 +82,21 @@ public:
 };
 
 //#define STRACT_POINT
-#define DISTANCE_CHECK
+//#define DISTANCE_CHECK
 //#define CONSTRUCTOR_CHECK
+//#define ASSIGNMENT_CHECK
 
 double distance(const Point& A, const Point& B)
 {
 	return sqrt(pow((A.get_x() - B.get_x()), 2) + pow((A.get_y() - B.get_y()), 2));
+}
+
+Point operator+(const Point& left, const Point& right)
+{
+	Point result;
+	result.set_x(left.get_x() + right.get_x());
+	result.set_y(left.get_y() + right.get_y());
+	return result;
 }
 
 void main()
@@ -138,6 +155,30 @@ void main()
 
 	Point D = C; // Copy constructor
 	D.Print();
+
+	Point E; // Default constructor
+	E = D;   //Assignment operator
+	E.Print();
+
 #endif // CONSTRUCTOR_CHECK
 
+#ifdef ASSIGNMENT_CHECK
+	int a, b, c;
+	a = b = c = 0;
+	cout << a << "\t" << b << "\t" << c << endl;
+
+	Point A, B, C;
+	cout << delimeter << endl;
+	A = B = C = Point(2, 3);
+	//Point(2,3) - здесь мы явно вызываем конструктор, и создаем временный безымянный объект
+	cout << delimeter << endl;
+	A.Print();
+	B.Print();
+	C.Print();
+#endif // ASSIGNMENT_CHECK
+
+	Point A(2, 3);
+	Point B(7, 8);
+	Point C = A + B;
+	C.Print();
 }
