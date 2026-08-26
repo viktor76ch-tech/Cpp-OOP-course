@@ -1,4 +1,9 @@
-﻿#include<iostream>
+﻿//1. Для класса 'Fraction' перегрузить все арифметические операторы : / , +, -;
+//2. Перегрузить составные присваивания : +=, -=, *=, /=;
+//3. Перегрузить Incremento / Decremento(++ / --);
+//4. Перегрузить операторы сравнения : == , != , >, <, >= , <= ;
+
+#include<iostream>
 using namespace std;
 
 class Fraction
@@ -109,6 +114,16 @@ public:
 		numerator %= denominator;
 		return *this;
 	}
+	Fraction& turn_over()
+	{
+		//переворачиваем дробь:
+		int temp;
+		temp = numerator;
+		numerator = denominator;
+		denominator = temp;
+		return *this;
+	}
+	
 	void Print()const
 	{
 		if (integer) cout << integer;
@@ -133,6 +148,50 @@ Fraction operator*(Fraction left, Fraction right)
 	return Fraction
 	(
 		left.get_numerator() * right.get_numerator(),
+		left.get_denomirator() * right.get_denomirator()
+	).to_proper();
+}
+
+Fraction operator/(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper().turn_over();
+	return Fraction
+	(
+		left.get_numerator() * right.get_numerator(),
+		left.get_denomirator() * right.get_denomirator()
+	).to_proper();
+}
+
+Fraction operator+(Fraction left, Fraction right)
+{
+	/*left.to_improper();
+	right.to_improper();
+	Fraction result;
+	result.set_numerator(left.get_numerator() * right.get_denomirator() + right.get_numerator() * left.get_denomirator());
+	result.set_denominator(left.get_denomirator() * right.get_denomirator());
+	result.to_proper();
+	return result;*/
+
+
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+	(
+		(left.get_numerator() * right.get_denomirator() + 
+		right.get_numerator() * left.get_denomirator()), 
+		left.get_denomirator() * right.get_denomirator()
+	).to_proper();
+}
+
+Fraction operator-(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+	(
+		(left.get_numerator() * right.get_denomirator() -
+			right.get_numerator() * left.get_denomirator()),
 		left.get_denomirator() * right.get_denomirator()
 	).to_proper();
 }
@@ -164,4 +223,13 @@ void main()
 
 	Fraction C = A * B;
 	C.Print();
+
+	Fraction D = B / A;
+	D.Print();
+
+	Fraction E = A + B;
+	E.Print();
+
+	Fraction F = A - B;
+	F.Print();
 }
