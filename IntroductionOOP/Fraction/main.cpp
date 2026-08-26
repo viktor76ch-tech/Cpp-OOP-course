@@ -95,6 +95,20 @@ public:
 	}
 
 	//Methods:
+	Fraction& to_improper()
+	{
+		//перевод в неправильную дробь:
+		numerator += integer * denominator;
+		integer = 0;
+		return *this;
+	}
+	Fraction& to_proper()
+	{
+		//перевод в правильную дробь:
+		integer += numerator / denominator;
+		numerator %= denominator;
+		return *this;
+	}
 	void Print()const
 	{
 		if (integer) cout << integer;
@@ -109,7 +123,21 @@ public:
 	}
 };
 
-#define CONSTRUCTOR_CHECK
+Fraction operator*(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	/*Fraction result;
+	result.set_numerator(left.get_numerator()* right.get_numerator());
+	result.set_denominator(left.get_denomirator()* right.get_denomirator());*/
+	return Fraction
+	(
+		left.get_numerator() * right.get_numerator(),
+		left.get_denomirator() * right.get_denomirator()
+	).to_proper();
+}
+
+//#define CONSTRUCTOR_CHECK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -128,4 +156,12 @@ void main()
 
 #endif // CONSTRUCTOR_CHECK
 
+	Fraction A(1, 2, 3);
+	A.Print();
+
+	Fraction B(2, 3, 4);
+	B.Print();
+
+	Fraction C = A * B;
+	C.Print();
 }
