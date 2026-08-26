@@ -1,11 +1,11 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 class Fraction
 {
-	int integer;       // Целая часть
-	int numerator;     // Числитель
-	int denominator;   //Знаминатель
+	int integer;       // Р¦РµР»Р°СЏ С‡Р°СЃС‚СЊ
+	int numerator;     // Р§РёСЃР»РёС‚РµР»СЊ
+	int denominator;   //Р—РЅР°РјРёРЅР°С‚РµР»СЊ
 public:
 	int get_integer()const
 	{
@@ -41,7 +41,7 @@ public:
 		this->denominator = 1;
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	Fraction(int integer)	//explicit - явный
+	Fraction(int integer)	//explicit - СЏРІРЅС‹Р№
 	{
 		this->integer = integer;
 		this->numerator = 0;
@@ -50,12 +50,12 @@ public:
 	}
 	//Fraction(double decimal)
 	//{
-	//	//decimal - десятичная дробь.
+	//	//decimal - РґРµСЃСЏС‚РёС‡РЅР°СЏ РґСЂРѕР±СЊ.
 	//	decimal += 1e-10;
-	//	integer = decimal;		//1) получаем целую часть дроби;
-	//	decimal -= integer;		//2) убираем целую часть из десятичной дроби;
-	//	denominator = 1e+9;		//3) получаем максимально возможный знаменатель 1000000000;
-	//	numerator = decimal * denominator;//4) вытаскиваем дробную часть в числитель;
+	//	integer = decimal;		//1) РїРѕР»СѓС‡Р°РµРј С†РµР»СѓСЋ С‡Р°СЃС‚СЊ РґСЂРѕР±Рё;
+	//	decimal -= integer;		//2) СѓР±РёСЂР°РµРј С†РµР»СѓСЋ С‡Р°СЃС‚СЊ РёР· РґРµСЃСЏС‚РёС‡РЅРѕР№ РґСЂРѕР±Рё;
+	//	denominator = 1e+9;		//3) РїРѕР»СѓС‡Р°РµРј РјР°РєСЃРёРјР°Р»СЊРЅРѕ РІРѕР·РјРѕР¶РЅС‹Р№ Р·РЅР°РјРµРЅР°С‚РµР»СЊ 1000000000;
+	//	numerator = decimal * denominator;//4) РІС‹С‚Р°СЃРєРёРІР°РµРј РґСЂРѕР±РЅСѓСЋ С‡Р°СЃС‚СЊ РІ С‡РёСЃР»РёС‚РµР»СЊ;
 	//	reduce();
 	//	cout << "SingleArgumentConstructor:" << this << endl;
 	//}
@@ -97,14 +97,14 @@ public:
 	//Methods:
 	Fraction& to_improper()
 	{
-		//перевод в неправильную дробь:
+		//РїРµСЂРµРІРѕРґ РІ РЅРµРїСЂР°РІРёР»СЊРЅСѓСЋ РґСЂРѕР±СЊ:
 		numerator += integer * denominator;
 		integer = 0;
 		return *this;
 	}
 	Fraction& to_proper()
 	{
-		//перевод в правильную дробь:
+		//РїРµСЂРµРІРѕРґ РІ РїСЂР°РІРёР»СЊРЅСѓСЋ РґСЂРѕР±СЊ:
 		integer += numerator / denominator;
 		numerator %= denominator;
 		return *this;
