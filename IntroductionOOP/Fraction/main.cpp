@@ -3,6 +3,7 @@
 //3. Перегрузить Incremento / Decremento(++ / --);
 //4. Перегрузить операторы сравнения : == , != , >, <, >= , <= ;
 
+
 #include<iostream>
 using namespace std;
 
@@ -111,6 +112,7 @@ public:
 	{
 		//перевод в правильную дробь:
 		integer += numerator / denominator;
+		numerator < 0 ? numerator *= -1 : numerator;
 		numerator %= denominator;
 		return *this;
 	}
@@ -123,7 +125,6 @@ public:
 		denominator = temp;
 		return *this;
 	}
-	
 	void Print()const
 	{
 		if (integer) cout << integer;
@@ -135,6 +136,70 @@ public:
 		}
 		else if (integer == 0) cout << 0;
 		cout << endl;
+	}
+
+	//operators overloading
+	Fraction operator+=(Fraction right)
+	{
+		this->to_improper();
+		right.to_improper();
+		return Fraction
+		(
+			(this->get_numerator() * right.get_denomirator() +
+				right.get_numerator() * this->get_denomirator()),
+			this->get_denomirator() * right.get_denomirator()
+		).to_proper();
+	}
+	Fraction operator-=(Fraction right)
+	{
+		this->to_improper();
+		right.to_improper();
+		return Fraction
+		(
+			(this->get_numerator() * right.get_denomirator() -
+				right.get_numerator() * this->get_denomirator()),
+			this->get_denomirator() * right.get_denomirator()
+		).to_proper();
+	}
+	Fraction operator*=(Fraction right)
+	{
+		this->to_improper();
+		right.to_improper();
+		return Fraction
+		(
+			this->get_numerator() * right.get_numerator(),
+			this->get_denomirator() * right.get_denomirator()
+		).to_proper();
+	}
+	Fraction operator/=(Fraction right)
+	{
+		this->to_improper();
+		right.to_improper().turn_over();
+		return Fraction
+		(
+			this->get_numerator() * right.get_numerator(),
+			this->get_denomirator() * right.get_denomirator()
+		).to_proper();
+	}
+	Fraction& operator++()
+	{
+		this->set_integer(this->get_integer() + 1);
+		return *this;
+	}
+	Fraction& operator++(int)
+	{
+		this->set_integer(this->get_integer() + 1);
+		return *this;
+	}
+	Fraction& operator--()
+	{
+		this->set_integer(this->get_integer() - 1);
+		return *this;
+	}
+	Fraction& operator--(int)
+	{
+		this->set_integer(this->get_integer() - 1);
+		return *this;
 	}
 };
 
@@ -178,8 +243,8 @@ Fraction operator+(Fraction left, Fraction right)
 	right.to_improper();
 	return Fraction
 	(
-		(left.get_numerator() * right.get_denomirator() + 
-		right.get_numerator() * left.get_denomirator()), 
+		(left.get_numerator() * right.get_denomirator() +
+			right.get_numerator() * left.get_denomirator()),
 		left.get_denomirator() * right.get_denomirator()
 	).to_proper();
 }
@@ -196,7 +261,73 @@ Fraction operator-(Fraction left, Fraction right)
 	).to_proper();
 }
 
+bool operator==(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if (left.get_numerator() / left.get_denomirator() ==
+		right.get_numerator() / right.get_denomirator())
+		return true;
+	else
+		return false;
+}
+bool operator!=(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if (left.get_numerator() / left.get_denomirator() !=
+		right.get_numerator() / right.get_denomirator())
+		return true;
+	else
+		return false;
+}
+bool operator>(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if (left.get_numerator() / left.get_denomirator() >
+		right.get_numerator() / right.get_denomirator())
+		return true;
+	else
+		return false;
+}
+bool operator<(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if (left.get_numerator() / left.get_denomirator() <
+		right.get_numerator() / right.get_denomirator())
+		return true;
+	else
+		return false;
+}
+bool operator<=(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if (left.get_numerator() / left.get_denomirator() <=
+		right.get_numerator() / right.get_denomirator())
+		return true;
+	else
+		return false;
+}
+bool operator>=(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if (left.get_numerator() / left.get_denomirator() >=
+		right.get_numerator() / right.get_denomirator())
+		return true;
+	else
+		return false;
+}
+
 //#define CONSTRUCTOR_CHECK
+//#define TASK_1
+//#define TASK_2
+//#define TASK_3
+#define TASK_4
+
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -221,6 +352,10 @@ void main()
 	Fraction B(2, 3, 4);
 	B.Print();
 
+	Fraction N(1, 2, 3);
+	N.Print();
+
+#ifdef TASK_1
 	Fraction C = A * B;
 	C.Print();
 
@@ -232,4 +367,54 @@ void main()
 
 	Fraction F = A - B;
 	F.Print();
+
+	Fraction G = B - A;
+	G.Print();
+
+#endif // TASK_1
+
+#ifdef TASK_2
+
+	Fraction H = A += B;
+	H.Print();
+
+	Fraction I = A -= B;
+	I.Print();
+
+	Fraction J = A *= B;
+	J.Print();
+
+	Fraction K = B /= A;
+	K.Print();
+
+#endif // TASK_2
+
+#ifdef TASK_3
+
+	++A;
+	A.Print();
+
+	A++;
+	A.Print();
+
+	--B;
+	B.Print();
+
+	B--;
+	B.Print();
+
+#endif // TASK_3
+
+#ifdef TASK_4
+
+	cout << "Дроби 'A' и 'N' " << (A == N ? "" : "не ") << "равны!" << endl;
+	cout << "Дроби 'A' и 'B' " << (A != B ? "не " : "") << "равны!" << endl;
+	cout << "Дробь 'A' " << (A > B ? "" : "не ") << "больше дроби 'B'" << endl;
+	cout << "Дробь 'A' " << (A < B ? "" : "не ") << "меньше дроби 'B'" << endl;
+	cout << "Дробь 'A' " << (A <= B ? "" : "не ") << "меньше или равна дроби 'B'" << endl;
+	cout << "Дробь 'A' " << (A >= B ? "" : "не ") << "больше или равна дроби 'B'" << endl;
+	
+
+
+#endif // TASK_4
 }
