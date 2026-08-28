@@ -186,20 +186,22 @@ public:
 		this->set_integer(this->get_integer() + 1);
 		return *this;
 	}
-	Fraction& operator++(int)
+	const Fraction& operator++(int)
 	{
+		Fraction old = *this;
 		this->set_integer(this->get_integer() + 1);
-		return *this;
+		return old;
 	}
 	Fraction& operator--()
 	{
 		this->set_integer(this->get_integer() - 1);
 		return *this;
 	}
-	Fraction& operator--(int)
+	const Fraction& operator--(int)
 	{
+		Fraction old = *this;
 		this->set_integer(this->get_integer() - 1);
-		return *this;
+		return old;
 	}
 };
 
@@ -325,8 +327,8 @@ bool operator>=(Fraction left, Fraction right)
 //#define CONSTRUCTOR_CHECK
 //#define TASK_1
 //#define TASK_2
-//#define TASK_3
-#define TASK_4
+#define TASK_3
+//#define TASK_4
 
 void main()
 {
@@ -391,16 +393,20 @@ void main()
 
 #ifdef TASK_3
 
-	++A;
+	B = ++A;
 	A.Print();
-
-	A++;
-	A.Print();
-
-	--B;
 	B.Print();
 
-	B--;
+	B = A++;
+	A.Print();
+	B.Print();
+
+	B = --A;
+	A.Print();
+	B.Print();
+
+	B = A--;
+	A.Print();
 	B.Print();
 
 #endif // TASK_3
