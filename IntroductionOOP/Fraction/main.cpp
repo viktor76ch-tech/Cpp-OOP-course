@@ -4,6 +4,8 @@ using namespace std;
 class Fraction;        //Объявление класса
 Fraction operator*(Fraction left, Fraction right);//объявление функции
 Fraction operator/(const Fraction& left, const Fraction& right);
+Fraction operator+(Fraction left, Fraction right);
+Fraction operator-(Fraction left, Fraction right);
 class Fraction         //Реализация класса
 {
 	int integer;       // Целая часть
@@ -97,6 +99,16 @@ public:
 		return *this;
 	}
 
+	Fraction& operator+=(const Fraction& other)
+	{
+		return *this = *this + other;
+	}
+
+	Fraction& operator-=(const Fraction& other)
+	{
+		return *this = *this - other;
+	}
+
 	Fraction& operator*=(const Fraction& other)
 	{
 		return *this = *this * other;
@@ -143,6 +155,7 @@ public:
 	{
 		//перевод в правильную дробь:
 		integer += numerator / denominator;
+		numerator < 0 ? numerator *= -1 : numerator;
 		numerator %= denominator;
 		return *this;
 	}
@@ -195,8 +208,20 @@ Fraction operator+(Fraction left, Fraction right)
 	(
 		left.get_numerator() * right.get_denominator() + right.get_numerator() * left.get_denominator(),
 		left.get_denominator() * right.get_denominator()
-	).to_proper();
+	).to_proper().reduce();
 }
+
+Fraction operator-(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+	(
+		left.get_numerator() * right.get_denominator() - right.get_numerator() * left.get_denominator(),
+		left.get_denominator() * right.get_denominator()
+	).to_proper().reduce();
+}
+
 
 Fraction operator*(Fraction left, Fraction right)
 {
@@ -256,6 +281,15 @@ void main()
 	A.Print();
 
 	C = A + B;
+	C.Print();
+
+	A += B;
+	A.Print();
+
+	C = A - B;
+	C.Print();
+
+	A -= B;
 	C.Print();
 
 #endif // ARITHMETICAL_OPERATORS_CHECK
