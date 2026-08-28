@@ -125,6 +125,22 @@ public:
 		denominator = temp;
 		return *this;
 	}
+	Fraction& reduce()
+	{
+		int more, less, rest;
+		if (numerator > denominator)more = numerator, less = denominator;
+		else	less = numerator, more = denominator;
+		do
+		{
+			rest = more % less;
+			more = less;
+			less = rest;
+		} while (rest);
+		int GCD = more;	//GCD - Greatest Common Divisor (Наибольший общий делитель)
+		numerator /= GCD;
+		denominator /= GCD;
+		return *this;
+	}
 	void Print()const
 	{
 		if (integer) cout << integer;
@@ -148,7 +164,7 @@ public:
 			(this->get_numerator() * right.get_denomirator() +
 				right.get_numerator() * this->get_denomirator()),
 			this->get_denomirator() * right.get_denomirator()
-		).to_proper();
+		).to_proper().reduce();
 	}
 	Fraction operator-=(Fraction right)
 	{
@@ -159,7 +175,7 @@ public:
 			(this->get_numerator() * right.get_denomirator() -
 				right.get_numerator() * this->get_denomirator()),
 			this->get_denomirator() * right.get_denomirator()
-		).to_proper();
+		).to_proper().reduce();
 	}
 	Fraction operator*=(Fraction right)
 	{
@@ -169,7 +185,7 @@ public:
 		(
 			this->get_numerator() * right.get_numerator(),
 			this->get_denomirator() * right.get_denomirator()
-		).to_proper();
+		).to_proper().reduce();
 	}
 	Fraction operator/=(Fraction right)
 	{
@@ -179,7 +195,7 @@ public:
 		(
 			this->get_numerator() * right.get_numerator(),
 			this->get_denomirator() * right.get_denomirator()
-		).to_proper();
+		).to_proper().reduce();
 	}
 	Fraction& operator++()
 	{
@@ -216,7 +232,7 @@ Fraction operator*(Fraction left, Fraction right)
 	(
 		left.get_numerator() * right.get_numerator(),
 		left.get_denomirator() * right.get_denomirator()
-	).to_proper();
+	).to_proper().reduce();
 }
 
 Fraction operator/(Fraction left, Fraction right)
@@ -227,7 +243,7 @@ Fraction operator/(Fraction left, Fraction right)
 	(
 		left.get_numerator() * right.get_numerator(),
 		left.get_denomirator() * right.get_denomirator()
-	).to_proper();
+	).to_proper().reduce();
 }
 
 Fraction operator+(Fraction left, Fraction right)
@@ -248,7 +264,7 @@ Fraction operator+(Fraction left, Fraction right)
 		(left.get_numerator() * right.get_denomirator() +
 			right.get_numerator() * left.get_denomirator()),
 		left.get_denomirator() * right.get_denomirator()
-	).to_proper();
+	).to_proper().reduce();
 }
 
 Fraction operator-(Fraction left, Fraction right)
@@ -260,7 +276,7 @@ Fraction operator-(Fraction left, Fraction right)
 		(left.get_numerator() * right.get_denomirator() -
 			right.get_numerator() * left.get_denomirator()),
 		left.get_denomirator() * right.get_denomirator()
-	).to_proper();
+	).to_proper().reduce();
 }
 
 bool operator==(Fraction left, Fraction right)
@@ -325,9 +341,9 @@ bool operator>=(Fraction left, Fraction right)
 }
 
 //#define CONSTRUCTOR_CHECK
-//#define TASK_1
+#define TASK_1
 //#define TASK_2
-#define TASK_3
+//#define TASK_3
 //#define TASK_4
 
 void main()
@@ -358,6 +374,7 @@ void main()
 	N.Print();
 
 #ifdef TASK_1
+
 	Fraction C = A * B;
 	C.Print();
 
